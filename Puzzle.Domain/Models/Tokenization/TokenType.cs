@@ -7,6 +7,7 @@ public enum TokenType
     OpenParenthesis, CloseParenthesis,
     BinaryOperator,
     Equals,
+    Semicolon,
     Const,
     EndOfFile,
 }

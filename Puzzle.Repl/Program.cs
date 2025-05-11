@@ -1,12 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using Puzzle.Domain;
 using Puzzle.IoC;
 
 UnitOfWork context = new();
 
-var tokens = context.Lexer.Tokenize("const ^ a = 3\na = (45 + 3 * 2)").ToList();
+var program = context.Parser.Produce("1299 + 1;");
 
-foreach (var token in tokens)
-{
-    Console.WriteLine($"{token.Type}: {token.Value} At {token.Location}");
-}
+Console.ForegroundColor = ConsoleColor.Green;
+Console.WriteLine("\nEnd Puzzle Script");
+Console.ResetColor();

@@ -47,4 +47,18 @@ public class UnitOfWork
             return lexer;
         }
     }
+    
+    private IParser? parser;
+    public IParser Parser
+    {
+        get
+        {
+            if (parser == null)
+            {
+                parser = new Parser(Lexer, CompilerHandler, GlobalAccess);
+            }
+            
+            return parser;
+        }
+    }
 }

@@ -77,7 +77,17 @@ public class Lexer(ICompilerHandler handler, GlobalAccess global):ILexer
                     }
                     else if(global.Skippables.Contains(src[0]))
                     {
-                        if (src.Shift() == '\n')
+                        char skip = src.Shift();
+                        if (skip == '\r')
+                        {
+                            if (src[0] == '\n')
+                            {
+                                src.Shift();
+                            }
+                            
+                            line++;
+                        }
+                        else if (skip == '\n')
                         {
                             line++;
                         }

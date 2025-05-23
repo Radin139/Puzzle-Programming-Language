@@ -163,6 +163,10 @@ public class Parser(ILexer lexer, ICompilerHandler handler, GlobalAccess global)
                 return new NumericLiteralExpression(Convert.ToInt32(token.Value), token.Location, token.End);
             case TokenType.Identifier:
                 return new IdentifierExpression(token.Value, token.Location, token.End);
+            case TokenType.OpenParenthesis:
+                Expression result = parseExpression();
+                eat(TokenType.CloseParenthesis, location => new ParenthesisClosureCompilerError(location));
+                return result;
             default:
                 handler.Error(new ParserCompilerError(token.Value, token.Location));
                 return null;

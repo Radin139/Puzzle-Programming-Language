@@ -2,10 +2,11 @@
 
 using Puzzle.Domain;
 using Puzzle.IoC;
+using Environment = Puzzle.Domain.Models.Interpretation.Environment;
 
 UnitOfWork context = new();
 
-var program = context.Parser.Produce("1299 + 1;");
+Console.WriteLine(context.CompilerService.Compiler(File.ReadAllText("E:\\Projects\\Puzzle\\Puzzle Programming Language\\Puzzle.Repl\\main.puzzle")));
 
 Console.ForegroundColor = ConsoleColor.Green;
 Console.WriteLine("\nEnd Puzzle Script");

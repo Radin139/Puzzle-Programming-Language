@@ -1,4 +1,6 @@
-﻿using Puzzle.Data.Implementations;
+﻿using Puzzle.Core.Services.Implementations;
+using Puzzle.Core.Services.Interfaces;
+using Puzzle.Data.Implementations;
 using Puzzle.Domain.Interfaces;
 
 namespace Puzzle.IoC;
@@ -59,6 +61,34 @@ public class UnitOfWork
             }
             
             return parser;
+        }
+    }
+    
+    private IInterpreter? interpreter;
+    public IInterpreter Interpreter
+    {
+        get
+        {
+            if (interpreter == null)
+            {
+                interpreter = new Interpreter(CompilerHandler);
+            }
+            
+            return interpreter;
+        }
+    }
+    
+    private ICompilerService? compilerService;
+    public ICompilerService CompilerService
+    {
+        get
+        {
+            if (compilerService == null)
+            {
+                compilerService = new CompilerService(Parser, Interpreter, CompilerHandler);
+            }
+            
+            return compilerService;
         }
     }
 }
